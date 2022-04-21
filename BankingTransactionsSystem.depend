@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1650510935 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/main.c
+1650551400 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/main.c
 	<stdio.h>
 	<stdlib.h>
 	<glib.h>
+	"accounts.h"
 
 1647529291 /usr/include/glib-2.0/glib.h
 	<glib/galloca.h>
@@ -399,4 +400,16 @@
 	<pthread.h>
 
 1647529291 /usr/include/glib-2.0/glib/glib-autocleanups.h
+
+1650549222 /home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/accounts.h
+	<glib.h>
+
+1650552059 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/accounts.c
+	<stdio.h>
+	"accounts.h"
+	"shared.h"
+
+1650548199 /home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/constants.h
+
+1650552822 /home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/shared.h
 
