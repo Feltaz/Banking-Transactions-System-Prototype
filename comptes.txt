@@ -1,0 +1,4 @@
+Référence 			 Valeur 			 État 			 Plafond Débit 
+1234 			 300 			 Positif 			 0 
+6254 			 500 			 Positif 			 600 
+9456 			 200 			 Négatif 			 250 
