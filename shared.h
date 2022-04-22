@@ -1,17 +1,17 @@
-#ifndef CONSTANTS_H
-#define CONSTANTS_H
+#ifndef SHARED_H
+#define SHARED_H
 
 // NOTE: Beware when allocating arrays, french special characters are 2 bytes long in UTF-8 encoding
-const char* STATE_POSITIVE = "Positif";
-const char* STATE_NEGATIVE = "Négatif";
+extern const char* STATE_POSITIVE;
+extern const char* STATE_NEGATIVE;
 
-const char* TRANSACTION_TYPE_DEBIT = "Débit";
-const char* TRANSACTION_TYPE_CREDIT = "Crédit";
+extern const char* TRANSACTION_TYPE_DEBIT;
+extern const char* TRANSACTION_TYPE_CREDIT;
 
-const char* TRANSACTION_RESULT_SUCCESS = "Succès";
-const char* TRANSACTION_RESULT_FAILURE = "Échec";
+extern const char* TRANSACTION_RESULT_SUCCESS;
+extern const char* TRANSACTION_RESULT_FAILURE;
 
-#endif // CONSTANTS_H
+#endif // SHARED_H
 
 
 // g_slist_foreach() expects a second argument of type GFunc(macro for "void (*)(void *, void*)"), that's why it is being casted

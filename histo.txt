@@ -1,0 +1,2 @@
+Référence 			 Transaction 			 Valeur 			 Résultat 			 État 
+1234 			 Débit 			 200 			 Succès 			 Positif 

@@ -1,9 +1,12 @@
 # depslib dependency file v1.0
-1650551400 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/main.c
+1650583925 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/main.c
 	<stdio.h>
 	<stdlib.h>
 	<glib.h>
+	"shared.h"
+	"bills.h"
 	"accounts.h"
+	"transactions.h"
 
 1647529291 /usr/include/glib-2.0/glib.h
 	<glib/galloca.h>
@@ -401,15 +404,33 @@
 
 1647529291 /usr/include/glib-2.0/glib/glib-autocleanups.h
 
-1650549222 /home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/accounts.h
+1650577974 /home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/accounts.h
 	<glib.h>
+	"shared.h"
 
-1650552059 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/accounts.c
+1650577976 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/accounts.c
 	<stdio.h>
 	"accounts.h"
-	"shared.h"
 
 1650548199 /home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/constants.h
 
-1650552822 /home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/shared.h
+1650581066 /home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/shared.h
+
+1650581130 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/transactions.c
+	<stdio.h>
+	"transactions.h"
+
+1650578040 /home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/transactions.h
+	<glib.h>
+	"shared.h"
+
+1650580911 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/shared.c
+	"shared.h"
+
+1650584112 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/bills.c
+	<stdio.h>
+	"bills.h"
+
+1650582634 /home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/bills.h
+	<glib.h>
 

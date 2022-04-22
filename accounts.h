@@ -1,4 +1,5 @@
 #include <glib.h>
+#include "shared.h"
 
 #ifndef ACCOUNTS_H
 #define ACCOUNTS_H
