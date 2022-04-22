@@ -1,2 +1,12 @@
 Référence 			 Transaction 			 Valeur 			 Résultat 			 État 
 1234 			 Débit 			 200 			 Succès 			 Positif 
+1234 			 Crédit 			 200 			 Succès 			 Positif 
+1234 			 Débit 			 2000 			 Échec 			 Positif 
+1234 			 Débit 			 800 			 Succès 			 Négatif 
+1234 			 Débit 			 800 			 Succès 			 Négatif 
+1234 			 Débit 			 800 			 Succès 			 Négatif 
+1234 			 Débit 			 800 			 Succès 			 Négatif 
+9456 			 Débit 			 200 			 Succès 			 Négatif 
+9456 			 Débit 			 200 			 Succès 			 Négatif 
+1234 			 Débit 			 800.50 			 Succès 			 Négatif 
+1234 			 Débit 			 800.50 			 Échec 			 Négatif 

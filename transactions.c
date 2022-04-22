@@ -21,7 +21,7 @@ GSList* read_transactions_from_file(){
         if(!feof(transactions_file)){
             transaction = (TRANSACTION*)malloc(sizeof(TRANSACTION));
 
-            sscanf(buffer, "%d %s %d %s %s", &(transaction->ref), transaction->transaction, &(transaction->value), transaction->result, transaction->state);
+            sscanf(buffer, "%d %s %f %s %s", &(transaction->ref), transaction->transaction, &(transaction->value), transaction->result, transaction->state);
             transactions = g_slist_append(transactions, transaction);
         }
     }
@@ -48,7 +48,7 @@ void write_transactions_to_file(GSList* transactions){
     for(iterator = transactions; iterator; iterator = iterator->next){
         transaction = (TRANSACTION*)iterator->data;
 
-        fprintf(transactions_file, "%d \t\t\t %s \t\t\t %d \t\t\t %s \t\t\t %s \n", transaction->ref, transaction->transaction, transaction->value, transaction->result, transaction->state);
+        fprintf(transactions_file, "%d \t\t\t %s \t\t\t %.2f \t\t\t %s \t\t\t %s \n", transaction->ref, transaction->transaction, transaction->value, transaction->result, transaction->state);
     }
 
     fclose(transactions_file);
@@ -58,7 +58,7 @@ GSList* get_transactions(){
     return read_transactions_from_file();
 }
 
-int add_transaction(int ref, char* transaction, int value, char* result, char* state){
+int add_transaction(int ref, const char* transaction, float value, const char* result, const char* state){
     FILE* transactions_file = fopen("histo.txt", "a");
 
     if(!transactions_file){
@@ -66,7 +66,7 @@ int add_transaction(int ref, char* transaction, int value, char* result, char* s
         exit(-1);
     }
 
-    fprintf(transactions_file, "%d \t\t\t %s \t\t\t %d \t\t\t %s \t\t\t %s \n", ref, transaction, value, result, state);
+    fprintf(transactions_file, "%d \t\t\t %s \t\t\t %.2f \t\t\t %s \t\t\t %s \n", ref, transaction, value, result, state);
 
     fclose(transactions_file);
 

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "shared.h"
 #include "bills.h"
 
 GSList* read_bills_from_file(){
@@ -59,17 +60,35 @@ GSList* get_bills(){
     return read_bills_from_file();
 }
 
-int add_bill(int ref, float debt){
-    FILE* bills_file = fopen("facture.txt", "a");
+int increment_bill(int ref, float debit_value){
+    GSList* iterator = NULL;
+    BILL* temp = NULL;
+    BILL* bill = NULL;
 
-    if(!bills_file){
-        printf("Error Occurred While Opening File!");
-        exit(-1);
+    GSList* bills = read_bills_from_file();
+
+    for(iterator = bills; iterator != NULL; iterator = iterator->next){
+        temp = (BILL*)iterator->data;
+
+        if(temp->ref == ref){
+            bill = temp;
+            break;
+        }
     }
 
-    fprintf(bills_file, "%d \t\t\t %.2f \n", ref, debt);
+    if(!bill){
+        bill = (BILL*)malloc(sizeof(BILL));
+        bill->ref = ref;
+        bill->debt = (debit_value * 2)/100;
 
-    fclose(bills_file);
+        bills = g_slist_append(bills, bill);
+    }
+    else {
+        bill->debt += (debit_value * 2)/100;
+    }
+
+    write_bills_to_file(bills);
+    free_list(bills);
 
     return 0;
 }

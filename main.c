@@ -9,9 +9,9 @@
 void print_account(ACCOUNT* account){
     printf("Account Details: \n");
     printf("Reference: %d\n", account->ref);
-    printf("Value: %d\n", account->value);
+    printf("Value: %.2f\n", account->value);
     printf("State: %s\n", account->state);
-    printf("Debit Threshold: %d\n", account->debit_threshold);
+    printf("Debit Threshold: %.2f\n", account->debit_threshold);
     printf("\n");
 }
 
@@ -19,7 +19,7 @@ void print_transaction(TRANSACTION* transaction){
     printf("Transaction Details: \n");
     printf("Reference: %d\n", transaction->ref);
     printf("Transaction: %s\n", transaction->transaction);
-    printf("Value: %d\n", transaction->value);
+    printf("Value: %.2f\n", transaction->value);
     printf("Resultat: %s\n", transaction->result);
     printf("State: %s\n", transaction->state);
     printf("\n");
@@ -92,6 +92,8 @@ int main()
     free(bill);*/
 
     //get_bills();
+
+    debit(1234, 800.5);
 
     return 0;
 }

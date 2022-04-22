@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "accounts.h"
+#include "transactions.h"
+#include "bills.h"
 
 GSList* read_accounts_from_file(){
     char buffer[256];
@@ -22,7 +24,7 @@ GSList* read_accounts_from_file(){
         if(!feof(accounts_file)){
             account = (ACCOUNT*)malloc(sizeof(ACCOUNT));
 
-            sscanf(buffer, "%d %d %s %d", &(account->ref), &(account->value), account->state, &(account->debit_threshold));
+            sscanf(buffer, "%d %f %s %f", &(account->ref), &(account->value), account->state, &(account->debit_threshold));
             accounts = g_slist_append(accounts, account);
         }
     }
@@ -49,7 +51,7 @@ void write_accounts_to_file(GSList* accounts){
     for(iterator = accounts; iterator; iterator = iterator->next){
         account = (ACCOUNT*)iterator->data;
 
-        fprintf(accounts_file, "%d \t\t\t %d \t\t\t %s \t\t\t %d \n", account->ref, account->value, account->state, account->debit_threshold);
+        fprintf(accounts_file, "%d \t\t\t %.2f \t\t\t %s \t\t\t %.2f \n", account->ref, account->value, account->state, account->debit_threshold);
     }
 
     fclose(accounts_file);
@@ -78,7 +80,7 @@ ACCOUNT* get_account(int ref){
         fgets(buffer, 256, accounts_file);
 
         if(!feof(accounts_file)){
-            sscanf(buffer, "%d %d %s %d", &(temp.ref), &(temp.value), temp.state, &(temp.debit_threshold));
+            sscanf(buffer, "%d %f %s %f", &(temp.ref), &(temp.value), temp.state, &(temp.debit_threshold));
 
             if(temp.ref == ref){
                 account = (ACCOUNT*)malloc(sizeof(ACCOUNT));
@@ -94,7 +96,7 @@ ACCOUNT* get_account(int ref){
     return account;
 }
 
-int debit(int ref, int value){
+int debit(int ref, float value){
     GSList* iterator = NULL;
     ACCOUNT* temp = NULL;
     ACCOUNT* account = NULL;
@@ -120,26 +122,36 @@ int debit(int ref, int value){
     if(!strncmp(account->state, STATE_POSITIVE, 9)){
         if(account->value >= value){
             account->value -= value;
+
+            add_transaction(account->ref, TRANSACTION_TYPE_DEBIT, value, TRANSACTION_RESULT_SUCCESS, account->state);
         }
         else if(account->value < value && value - account->value <= account->debit_threshold){
             strncpy(account->state, STATE_NEGATIVE, 9);
             account->value = value - account->value;
+
+            add_transaction(account->ref, TRANSACTION_TYPE_DEBIT, value, TRANSACTION_RESULT_SUCCESS, account->state);
+            increment_bill(account->ref, account->value);
         }
         else if(account->value < value && value - account->value > account->debit_threshold){
             printf("Transaction failed! Amount exceeded negative withdrawal threshold.");
-            free_list(accounts);
+            add_transaction(account->ref, TRANSACTION_TYPE_DEBIT, value, TRANSACTION_RESULT_FAILURE, account->state);
 
+            free_list(accounts);
             return -1;
         }
     }
     else if(!strncmp(account->state, STATE_NEGATIVE, 9)){
         if(account->value + value <= account->debit_threshold){
             account->value += value;
+
+            add_transaction(account->ref, TRANSACTION_TYPE_DEBIT, value, TRANSACTION_RESULT_SUCCESS, account->state);
+            increment_bill(account->ref, value);
         }
         else if(account->value + value > account->debit_threshold){
             printf("Transaction failed! Amount exceeded negative withdrawal threshold.");
-            free_list(accounts);
+            add_transaction(account->ref, TRANSACTION_TYPE_DEBIT, value, TRANSACTION_RESULT_FAILURE, account->state);
 
+            free_list(accounts);
             return -1;
         }
     }
@@ -150,7 +162,7 @@ int debit(int ref, int value){
     return 0;
 }
 
-int credit(int ref, int value){
+int credit(int ref, float value){
     GSList* iterator = NULL;
     ACCOUNT* temp = NULL;
     ACCOUNT* account = NULL;
@@ -174,14 +186,20 @@ int credit(int ref, int value){
 
     if(!strncmp(account->state, STATE_POSITIVE, 9)){
         account->value += value;
+
+        add_transaction(account->ref, TRANSACTION_TYPE_CREDIT, value, TRANSACTION_RESULT_SUCCESS, account->state);
     }
     else if(!strncmp(account->state, STATE_NEGATIVE, 9)){
         if(account->value - value <= 0){
             strncpy(account->state, STATE_POSITIVE, 9);
             account->value = value - account->value;
+
+            add_transaction(account->ref, TRANSACTION_TYPE_CREDIT, value, TRANSACTION_RESULT_SUCCESS, account->state);
         }
         else if(account->value - value > 0){
             account->value -= value;
+
+            add_transaction(account->ref, TRANSACTION_TYPE_CREDIT, value, TRANSACTION_RESULT_SUCCESS, account->state);
         }
     }
 

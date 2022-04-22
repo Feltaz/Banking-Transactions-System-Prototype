@@ -10,8 +10,8 @@ typedef struct {
 
 GSList* get_bills();
 
-int add_bill(int ref, float debt);
+int increment_bill(int, float);
 
-BILL* get_bill(int ref);
+BILL* get_bill(int);
 
 #endif // BILLS_H

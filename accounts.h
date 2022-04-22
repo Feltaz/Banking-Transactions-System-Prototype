@@ -6,17 +6,17 @@
 
 typedef struct {
     int ref;
-    int value;
+    float value;
     char state[9];
-    int debit_threshold;
+    float debit_threshold;
 } ACCOUNT;
 
 GSList* get_accounts();
 
-ACCOUNT* get_account(int ref);
+ACCOUNT* get_account(int);
 
-int debit(int ref, int value);
+int debit(int, float);
 
-int credit(int ref, int value);
+int credit(int, float);
 
 #endif // ACCOUNTS_H

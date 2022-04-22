@@ -6,7 +6,7 @@
 
 typedef struct {
     int ref;
-    int value;
+    float value;
     char transaction[8];
     char result[8];
     char state[9];
@@ -14,6 +14,6 @@ typedef struct {
 
 GSList* get_transactions();
 
-int add_transaction(int ref, char* transaction, int value, char* result, char* state);
+int add_transaction(int, const char*, float, const char*, const char*);
 
 #endif // TRANSACTIONS_H
