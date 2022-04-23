@@ -12,7 +12,7 @@ GSList* read_accounts_from_file(){
     accounts_file = fopen("comptes.txt", "r");
 
     if(!accounts_file) {
-        printf("Error Occurred While Opening File!");
+        printf("Error Occurred While Opening File! \n");
         exit(-1);
     }
 
@@ -42,7 +42,7 @@ void write_accounts_to_file(GSList* accounts){
     accounts_file = fopen("comptes.txt", "w");
 
     if(!accounts_file) {
-        printf("Error Occurred While Opening File!");
+        printf("Error Occurred While Opening File! \n");
         exit(-1);
     }
 
@@ -70,7 +70,7 @@ ACCOUNT* get_account(int ref){
     accounts_file = fopen("facture.txt", "r");
 
     if(!accounts_file){
-        printf("Error Occurred While Opening File!");
+        printf("Error Occurred While Opening File! \n");
         exit(-1);
     }
 
@@ -133,11 +133,11 @@ int debit(int ref, float value){
             increment_bill(account->ref, account->value);
         }
         else if(account->value < value && value - account->value > account->debit_threshold){
-            printf("Transaction failed! Amount exceeded negative withdrawal threshold.");
+            printf("Transaction failed! Amount exceeded negative withdrawal threshold. \n");
             add_transaction(account->ref, TRANSACTION_TYPE_DEBIT, value, TRANSACTION_RESULT_FAILURE, account->state);
 
             free_list(accounts);
-            return -1;
+            return -2;
         }
     }
     else if(!strncmp(account->state, STATE_NEGATIVE, 9)){
@@ -148,11 +148,11 @@ int debit(int ref, float value){
             increment_bill(account->ref, value);
         }
         else if(account->value + value > account->debit_threshold){
-            printf("Transaction failed! Amount exceeded negative withdrawal threshold.");
+            printf("Transaction failed! Amount exceeded negative withdrawal threshold. \n");
             add_transaction(account->ref, TRANSACTION_TYPE_DEBIT, value, TRANSACTION_RESULT_FAILURE, account->state);
 
             free_list(accounts);
-            return -1;
+            return -2;
         }
     }
 

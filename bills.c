@@ -11,7 +11,7 @@ GSList* read_bills_from_file(){
     bills_file = fopen("facture.txt", "r");
 
     if(!bills_file) {
-        printf("Error Occurred While Opening File!");
+        printf("Error Occurred While Opening File! \n");
         exit(-1);
     }
 
@@ -41,7 +41,7 @@ void write_bills_to_file(GSList* bills){
     bills_file = fopen("facture.txt", "w");
 
     if(!bills_file) {
-        printf("Error Occurred While Opening File!");
+        printf("Error Occurred While Opening File! \n");
         exit(-1);
     }
 
@@ -102,7 +102,7 @@ BILL* get_bill(int ref){
     bills_file = fopen("facture.txt", "r");
 
     if(!bills_file){
-        printf("Error Occurred While Opening File!");
+        printf("Error Occurred While Opening File! \n");
         exit(-1);
     }
 

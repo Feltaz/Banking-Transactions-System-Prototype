@@ -31,9 +31,25 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="accounts.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="accounts.h" />
+		<Unit filename="bills.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bills.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="shared.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="shared.h" />
+		<Unit filename="transactions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="transactions.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

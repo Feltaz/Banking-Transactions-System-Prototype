@@ -10,7 +10,7 @@ GSList* read_transactions_from_file(){
     transactions_file = fopen("histo.txt", "r");
 
     if(!transactions_file) {
-        printf("Error Occurred While Opening File!");
+        printf("Error Occurred While Opening File! \n");
         exit(-1);
     }
 
@@ -39,7 +39,7 @@ void write_transactions_to_file(GSList* transactions){
     transactions_file = fopen("histo.txt", "w");
 
     if(!transactions_file) {
-        printf("Error Occurred While Opening File!");
+        printf("Error Occurred While Opening File! \n");
         exit(-1);
     }
 
@@ -62,7 +62,7 @@ int add_transaction(int ref, const char* transaction, float value, const char* r
     FILE* transactions_file = fopen("histo.txt", "a");
 
     if(!transactions_file){
-        printf("Error Occurred While Opening File!");
+        printf("Error Occurred While Opening File! \n");
         exit(-1);
     }
 

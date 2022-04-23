@@ -10,3 +10,7 @@ Référence 			 Transaction 			 Valeur 			 Résultat 			 État
 9456 			 Débit 			 200 			 Succès 			 Négatif 
 1234 			 Débit 			 800.50 			 Succès 			 Négatif 
 1234 			 Débit 			 800.50 			 Échec 			 Négatif 
+1234 			 Débit 			 5000.00 			 Échec 			 Négatif 
+1234 			 Crédit 			 200.00 			 Succès 			 Positif 
+6254 			 Débit 			 200.00 			 Succès 			 Positif 
+9456 			 Débit 			 150.00 			 Succès 			 Négatif 
