@@ -2,6 +2,8 @@
 #include "shared.h"
 #include "bills.h"
 
+pthread_mutex_t bills_file_mutex = PTHREAD_MUTEX_INITIALIZER; // Mutex for bills file
+
 GSList* read_bills_from_file(){
     char buffer[256]; // Buffer to store lines read from file
     BILL* bill = NULL;
@@ -59,7 +61,13 @@ void write_bills_to_file(GSList* bills){
 }
 
 GSList* get_bills(){
-    return read_bills_from_file();
+    GSList* bills = NULL;
+
+    pthread_mutex_lock(&bills_file_mutex);
+    bills = read_bills_from_file();
+    pthread_mutex_unlock(&bills_file_mutex);
+
+    return bills;
 }
 
 int increment_bill(int ref, float debit_value){
@@ -67,6 +75,7 @@ int increment_bill(int ref, float debit_value){
     BILL* temp = NULL; // Buffer to hold the bill in a linked list node
     BILL* bill = NULL;
 
+    pthread_mutex_lock(&bills_file_mutex);
     // Load bills to memory
     GSList* bills = read_bills_from_file();
 
@@ -94,6 +103,7 @@ int increment_bill(int ref, float debit_value){
 
     // Save bills to file
     write_bills_to_file(bills);
+    pthread_mutex_unlock(&bills_file_mutex);
     free_list(bills);
 
     return 0;
@@ -105,6 +115,7 @@ BILL* get_bill(int ref){
     BILL* bill = NULL;
     FILE* bills_file = NULL;
 
+    pthread_mutex_lock(&bills_file_mutex);
     bills_file = fopen("facture.txt", "r");
 
     if(!bills_file){
@@ -132,6 +143,7 @@ BILL* get_bill(int ref){
     }
 
     fclose(bills_file);
+    pthread_mutex_unlock(&bills_file_mutex);
 
     return bill;
 }

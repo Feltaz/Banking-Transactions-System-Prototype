@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1651180364 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/main.c
+1651181564 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/main.c
 	<stdio.h>
 	<stdlib.h>
 	<unistd.h>
@@ -413,7 +413,7 @@
 	<glib.h>
 	"shared.h"
 
-1650683551 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/accounts.c
+1651183345 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/accounts.c
 	<stdio.h>
 	"accounts.h"
 	"transactions.h"
@@ -423,7 +423,7 @@
 
 1650581066 /home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/shared.h
 
-1650683572 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/transactions.c
+1651183412 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/transactions.c
 	<stdio.h>
 	"transactions.h"
 
@@ -434,7 +434,7 @@
 1650580911 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/shared.c
 	"shared.h"
 
-1650683591 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/bills.c
+1651183371 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/bills.c
 	<stdio.h>
 	"shared.h"
 	"bills.h"

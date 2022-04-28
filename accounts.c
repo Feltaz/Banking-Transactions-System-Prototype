@@ -3,6 +3,8 @@
 #include "transactions.h"
 #include "bills.h"
 
+pthread_mutex_t accounts_file_mutex = PTHREAD_MUTEX_INITIALIZER; // Mutex for accounts file
+
 GSList* read_accounts_from_file(){
     char buffer[256]; // Buffer to store lines read from file
     ACCOUNT* account = NULL;
@@ -60,7 +62,13 @@ void write_accounts_to_file(GSList* accounts){
 }
 
 GSList* get_accounts(){
-    return read_accounts_from_file();
+    GSList* accounts = NULL;
+
+    pthread_mutex_lock(&accounts_file_mutex);
+    accounts = read_accounts_from_file();
+    pthread_mutex_unlock(&accounts_file_mutex);
+
+    return accounts;
 }
 
 ACCOUNT* get_account(int ref){
@@ -69,6 +77,7 @@ ACCOUNT* get_account(int ref){
     ACCOUNT* account = NULL;
     FILE* accounts_file = NULL;
 
+    pthread_mutex_lock(&accounts_file_mutex);
     accounts_file = fopen("facture.txt", "r");
 
     if(!accounts_file){
@@ -96,6 +105,7 @@ ACCOUNT* get_account(int ref){
     }
 
     fclose(accounts_file);
+    pthread_mutex_unlock(&accounts_file_mutex);
 
     return account;
 }
@@ -106,6 +116,7 @@ int debit(int ref, float value){
     ACCOUNT* account = NULL;
 
     // Load accounts to memory
+    pthread_mutex_lock(&accounts_file_mutex);
     GSList* accounts = read_accounts_from_file();
 
     for(iterator = accounts; iterator != NULL; iterator = iterator->next){
@@ -170,6 +181,7 @@ int debit(int ref, float value){
 
     // Save accounts to file
     write_accounts_to_file(accounts);
+    pthread_mutex_unlock(&accounts_file_mutex);
     free_list(accounts);
 
     return 0;
@@ -181,6 +193,7 @@ int credit(int ref, float value){
     ACCOUNT* account = NULL;
 
     // Load accounts to memory
+    pthread_mutex_lock(&accounts_file_mutex);
     GSList* accounts = read_accounts_from_file();
 
     for(iterator = accounts; iterator != NULL; iterator = iterator->next){
@@ -224,6 +237,7 @@ int credit(int ref, float value){
 
     // Save accounts to file
     write_accounts_to_file(accounts);
+    pthread_mutex_unlock(&accounts_file_mutex);
     free_list(accounts);
 
     return 0;

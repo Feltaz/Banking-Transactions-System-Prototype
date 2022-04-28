@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "transactions.h"
 
+pthread_mutex_t transactions_file_mutex = PTHREAD_MUTEX_INITIALIZER; // Mutex for transactions file
+
 GSList* read_transactions_from_file(){
     char buffer[256]; // Buffer to store lines read from file
     TRANSACTION* transaction = NULL;
@@ -57,10 +59,17 @@ void write_transactions_to_file(GSList* transactions){
 }
 
 GSList* get_transactions(){
-    return read_transactions_from_file();
+    GSList* transactions = NULL;
+
+    pthread_mutex_lock(&transactions_file_mutex);
+    read_transactions_from_file();
+    pthread_mutex_unlock(&transactions_file_mutex);
+
+    return transactions;
 }
 
 int add_transaction(int ref, const char* transaction, float value, const char* result, const char* state){
+    pthread_mutex_lock(&transactions_file_mutex);
     FILE* transactions_file = fopen("histo.txt", "a");
 
     if(!transactions_file){
@@ -72,6 +81,7 @@ int add_transaction(int ref, const char* transaction, float value, const char* r
     fprintf(transactions_file, "%d \t\t\t %s \t\t\t %.2f \t\t\t %s \t\t\t %s \n", ref, transaction, value, result, state);
 
     fclose(transactions_file);
+    pthread_mutex_unlock(&transactions_file_mutex);
 
     return 0;
 }
