@@ -1,4 +1,4 @@
 Référence 			 Valeur 			 État 			 Plafond Débit 
-1234 			 399.50 			 Positif 			 200.00 
+1234 			 499.50 			 Positif 			 200.00 
 6254 			 300.00 			 Positif 			 600.00 
 9456 			 250.00 			 Négatif 			 250.00 

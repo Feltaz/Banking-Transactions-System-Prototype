@@ -78,7 +78,7 @@ ACCOUNT* get_account(int ref){
     FILE* accounts_file = NULL;
 
     pthread_mutex_lock(&accounts_file_mutex);
-    accounts_file = fopen("facture.txt", "r");
+    accounts_file = fopen("comptes.txt", "r");
 
     if(!accounts_file){
         printf("Error Occurred While Opening File! \n");

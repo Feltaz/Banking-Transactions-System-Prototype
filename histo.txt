@@ -35,3 +35,4 @@ Référence 			 Transaction 			 Valeur 			 Résultat 			 État
 1234 			 Débit 			 100.00 			 Succès 			 Positif 
 1234 			 Débit 			 20.00 			 Succès 			 Positif 
 1234 			 Crédit 			 50.00 			 Succès 			 Positif 
+1234 			 Crédit 			 100.00 			 Succès 			 Positif 

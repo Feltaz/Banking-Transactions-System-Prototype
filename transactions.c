@@ -62,7 +62,7 @@ GSList* get_transactions(){
     GSList* transactions = NULL;
 
     pthread_mutex_lock(&transactions_file_mutex);
-    read_transactions_from_file();
+    transactions = read_transactions_from_file();
     pthread_mutex_unlock(&transactions_file_mutex);
 
     return transactions;

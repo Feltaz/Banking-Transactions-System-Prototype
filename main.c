@@ -11,6 +11,7 @@
 #include "bills.h"
 #include "accounts.h"
 #include "transactions.h"
+#include "banking_terminal.h"
 
 #define CLOSE_COMMAND "close"
 #define OPERATION_DEBIT "debit"
@@ -71,7 +72,7 @@ int handle_request(char* buffer){
         value = atof(request_parts[2]);
     }
 
-    printf("%s %d %.2f \n", operation, ref, value);
+    printf("--> client request: %s %d %.2f \n", operation, ref, value);
 
     // Handle request
     if(!strncmp(operation, OPERATION_DEBIT, sizeof(buffer))){
@@ -154,6 +155,9 @@ void* handle_connection(void * arg) {
 
 int main()
 {
+    pthread_t banking_system_thread; // thread to handle banking system menu
+    pthread_create(&banking_system_thread, NULL, main_banking_menu, NULL);
+
     int socket_fd, client_socket_fd; // variables to store server and client file descriptors
     struct sockaddr_in serv_addr; // variable to store server address
 
