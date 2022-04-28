@@ -3,7 +3,7 @@
 #include "bills.h"
 
 GSList* read_bills_from_file(){
-    char buffer[256];
+    char buffer[256]; // Buffer to store lines read from file
     BILL* bill = NULL;
     GSList* bills = NULL;
     FILE* bills_file = NULL;
@@ -15,11 +15,13 @@ GSList* read_bills_from_file(){
         exit(-1);
     }
 
+     // Read line from file
     fgets(buffer, 256, bills_file);
 
     while(!feof(bills_file)){
         fgets(buffer, 256, bills_file);
 
+        // Check again for EOF to avoid reading the last blank line
         if(!feof(bills_file)){
             bill = (BILL*)malloc(sizeof(BILL));
 
@@ -34,8 +36,8 @@ GSList* read_bills_from_file(){
 }
 
 void write_bills_to_file(GSList* bills){
-    GSList* iterator = NULL;
-    BILL* bill = NULL;
+    GSList* iterator = NULL; // Iterator for linked list
+    BILL* bill = NULL; // Buffer to hold the bill in a linked list node
     FILE* bills_file = NULL;
 
     bills_file = fopen("facture.txt", "w");
@@ -61,10 +63,11 @@ GSList* get_bills(){
 }
 
 int increment_bill(int ref, float debit_value){
-    GSList* iterator = NULL;
-    BILL* temp = NULL;
+    GSList* iterator = NULL; // Iterator for linked list
+    BILL* temp = NULL; // Buffer to hold the bill in a linked list node
     BILL* bill = NULL;
 
+    // Load bills to memory
     GSList* bills = read_bills_from_file();
 
     for(iterator = bills; iterator != NULL; iterator = iterator->next){
@@ -76,6 +79,7 @@ int increment_bill(int ref, float debit_value){
         }
     }
 
+    // If no bill exists for the account, create one
     if(!bill){
         bill = (BILL*)malloc(sizeof(BILL));
         bill->ref = ref;
@@ -83,10 +87,12 @@ int increment_bill(int ref, float debit_value){
 
         bills = g_slist_append(bills, bill);
     }
+    // If a bill exists for the account, increment it
     else {
         bill->debt += (debit_value * 2)/100;
     }
 
+    // Save bills to file
     write_bills_to_file(bills);
     free_list(bills);
 
@@ -94,7 +100,7 @@ int increment_bill(int ref, float debit_value){
 }
 
 BILL* get_bill(int ref){
-    char buffer[256];
+    char buffer[256]; // Buffer to store lines read from file
     BILL temp;
     BILL* bill = NULL;
     FILE* bills_file = NULL;
@@ -106,8 +112,10 @@ BILL* get_bill(int ref){
         exit(-1);
     }
 
+    // Read line from file
     fgets(buffer, 256, bills_file);
 
+    // Check again for EOF to avoid reading the last blank line
     while(!feof(bills_file)){
         fgets(buffer, 256, bills_file);
 

@@ -2,7 +2,7 @@
 #include "transactions.h"
 
 GSList* read_transactions_from_file(){
-    char buffer[256];
+    char buffer[256]; // Buffer to store lines read from file
     TRANSACTION* transaction = NULL;
     GSList* transactions = NULL;
     FILE* transactions_file = NULL;
@@ -14,8 +14,10 @@ GSList* read_transactions_from_file(){
         exit(-1);
     }
 
+    // Read line from file
     fgets(buffer, 256, transactions_file);
 
+    // Check again for EOF to avoid reading the last blank line
     while(!feof(transactions_file)){
         fgets(buffer, 256, transactions_file);
         if(!feof(transactions_file)){
@@ -32,8 +34,8 @@ GSList* read_transactions_from_file(){
 }
 
 void write_transactions_to_file(GSList* transactions){
-    GSList* iterator = NULL;
-    TRANSACTION* transaction = NULL;
+    GSList* iterator = NULL; // Iterator for linked list
+    TRANSACTION* transaction = NULL; // Buffer to hold the transaction in a linked list node
     FILE* transactions_file = NULL;
 
     transactions_file = fopen("histo.txt", "w");
@@ -66,6 +68,7 @@ int add_transaction(int ref, const char* transaction, float value, const char* r
         exit(-1);
     }
 
+    // Append transaction to file
     fprintf(transactions_file, "%d \t\t\t %s \t\t\t %.2f \t\t\t %s \t\t\t %s \n", ref, transaction, value, result, state);
 
     fclose(transactions_file);

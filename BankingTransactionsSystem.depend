@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1650683896 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/main.c
+1651180364 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/main.c
 	<stdio.h>
 	<stdlib.h>
 	<unistd.h>
 	<sys/types.h>
 	<sys/socket.h>
 	<netinet/in.h>
+	<pthread.h>
 	<glib.h>
 	"shared.h"
 	"bills.h"
