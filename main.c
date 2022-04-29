@@ -85,10 +85,10 @@ int handle_request(char* buffer){
                 return -1;
             default:
                 // Get success message with billing information if the account has bills to pay
-                char* message = get_transaction_success_message(ref);
+                {char* message = get_transaction_success_message(ref);
                 strncpy(buffer, message, 256);
                 free(message);
-                return 0;
+                return 0;}
         }
     }
     else if(!strncmp(operation, OPERATION_CREDIT, sizeof(buffer))){
@@ -98,10 +98,10 @@ int handle_request(char* buffer){
                 return -1;
             default:
                 // Get success message with billing information if the accounts has bills to pay
-                char* message = get_transaction_success_message(ref);
+                {char* message = get_transaction_success_message(ref);
                 strncpy(buffer, message, 256);
                 free(message);
-                return 0;
+                return 0;}
         }
     }
     else{
