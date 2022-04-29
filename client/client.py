@@ -38,6 +38,7 @@ def start_connection(HOST,PORT):
             print("do you wish to make another transaction? press y to conitnue or q to quit")
             choice=input()
         if(choice=="y"):
+            choice=""
             continue    
         elif choice=="q":
             break
