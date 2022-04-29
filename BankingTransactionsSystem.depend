@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1651194261 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/main.c
+1651199614 source:/home/kali/Desktop/BankingTransactionsSystem/BankingTransactionsSystem/main.c
 	<stdio.h>
 	<stdlib.h>
 	<unistd.h>

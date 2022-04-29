@@ -133,7 +133,7 @@ void* handle_connection(void * arg) {
                 // Read from client
                 if(read(*client_socket_ptr, buffer, sizeof(buffer)) < 0){
                     printf("Failed to receive message! \n");
-                    exit(-1);
+                    break;
                 }
 
                 handle_request(buffer);
@@ -141,7 +141,7 @@ void* handle_connection(void * arg) {
                 // Write to client
                 if(write(*client_socket_ptr, buffer, strlen(buffer)) < 0){
                     printf("Failed to send message! \n");
-                    exit(-1);
+                    break;
                 }
 
                 // End session loop on receiving close command
