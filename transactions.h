@@ -16,4 +16,6 @@ GSList* get_transactions();
 
 int add_transaction(int, const char*, float, const char*, const char*);
 
+char* get_transaction_success_message(int);
+
 #endif // TRANSACTIONS_H

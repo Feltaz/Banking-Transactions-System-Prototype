@@ -84,7 +84,10 @@ int handle_request(char* buffer){
                 strncpy(buffer, "Invalid reference! No account was found. \n", 256);
                 return -1;
             default:
-                strncpy(buffer, "Transaction successful! \n", 256);
+                // Get success message with billing information if the account has bills to pay
+                char* message = get_transaction_success_message(ref);
+                strncpy(buffer, message, 256);
+                free(message);
                 return 0;
         }
     }
@@ -94,7 +97,10 @@ int handle_request(char* buffer){
                 strncpy(buffer, "Invalid reference! No account was found. \n", 256);
                 return -1;
             default:
-                strncpy(buffer, "Transaction successful! \n", 256);
+                // Get success message with billing information if the accounts has bills to pay
+                char* message = get_transaction_success_message(ref);
+                strncpy(buffer, message, 256);
+                free(message);
                 return 0;
         }
     }

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "bills.h"
 #include "transactions.h"
 
 pthread_mutex_t transactions_file_mutex = PTHREAD_MUTEX_INITIALIZER; // Mutex for transactions file
@@ -84,5 +85,19 @@ int add_transaction(int ref, const char* transaction, float value, const char* r
     pthread_mutex_unlock(&transactions_file_mutex);
 
     return 0;
+}
+
+char* get_transaction_success_message(int ref){
+    char* buffer = (char*)malloc(256 * sizeof(char));
+    BILL* bill = get_bill(ref);
+
+    if(bill == NULL){
+        sprintf(buffer, "Transaction successful! \n");
+    }
+    else {
+        sprintf(buffer, "Transaction successful! Your remaining bill is %.2f \n", bill->debt);
+    }
+
+    return buffer;
 }
 

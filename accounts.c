@@ -130,6 +130,7 @@ int debit(int ref, float value){
 
     if(!account){
         printf("Account with reference %d was not found! \n", ref);
+        pthread_mutex_unlock(&accounts_file_mutex);
         free_list(accounts);
 
         return -1;
@@ -156,6 +157,7 @@ int debit(int ref, float value){
             printf("Transaction failed! Amount exceeded negative withdrawal threshold. \n");
             add_transaction(account->ref, TRANSACTION_TYPE_DEBIT, value, TRANSACTION_RESULT_FAILURE, account->state);
 
+            pthread_mutex_unlock(&accounts_file_mutex);
             free_list(accounts);
             return -2;
         }
@@ -174,6 +176,7 @@ int debit(int ref, float value){
             printf("Transaction failed! Amount exceeded negative withdrawal threshold. \n");
             add_transaction(account->ref, TRANSACTION_TYPE_DEBIT, value, TRANSACTION_RESULT_FAILURE, account->state);
 
+            pthread_mutex_unlock(&accounts_file_mutex);
             free_list(accounts);
             return -2;
         }
@@ -207,6 +210,7 @@ int credit(int ref, float value){
 
     if(!account){
         printf("Account with reference %d was not found! \n", ref);
+        pthread_mutex_unlock(&accounts_file_mutex);
         free_list(accounts);
 
         return -1;

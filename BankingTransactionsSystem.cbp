@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="accounts.h" />
+		<Unit filename="banking_terminal.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="banking_terminal.h" />
 		<Unit filename="bills.c">
 			<Option compilerVar="CC" />
 		</Unit>
