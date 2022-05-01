@@ -1,6 +1,5 @@
 import socket
 
-from django import conf
 import menu
 
 
