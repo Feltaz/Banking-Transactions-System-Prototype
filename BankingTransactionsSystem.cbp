@@ -30,7 +30,12 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="`pkg-config --cflags glib-2.0`" />
 		</Compiler>
+		<Linker>
+			<Add option="`pkg-config --libs glib-2.0`" />
+			<Add option="-lpthread" />
+		</Linker>
 		<Unit filename="accounts.c">
 			<Option compilerVar="CC" />
 		</Unit>
